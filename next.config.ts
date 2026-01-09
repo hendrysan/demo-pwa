@@ -50,6 +50,23 @@ const withPWA = require("next-pwa")({
         },
       },
     },
+    // API
+    {
+      urlPattern:
+        /^https:\/\/demo-pwa-be-main-8sjlfw\.laravel\.cloud\/api\/.*$/i,
+      handler: "NetworkFirst",
+      options: {
+        cacheName: "api-cache",
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 24 * 60 * 60,
+        },
+        networkTimeoutSeconds: 10,
+        cacheableResponse: {
+          statuses: [0, 200],
+        },
+      },
+    },
   ],
 });
 
