@@ -19,6 +19,12 @@
 
 # production
 /build
+/public/uploads
+/app
+/app_pwa
+.gradle
+.swc
+/gradle
 
 # misc
 .DS_Store

@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #f0f3f5;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+  margin: 1px;
+  border: 1px solid black;
+  border-color: black;
+  background: none;
+  color: purple;
+}
+
+@layer components {
+  .center-container {
+    @apply w-full flex flex-col items-center;
+  }
+
+  .app-container {
+    @apply max-w-7xl w-full rounded-xl bg-white 2xl:min-w-[1000px];
+  }
+
+  .btn {
+    @apply w-full bg-mainColor text-white rounded-3xl mt-8 px-8 py-3 border-none hover:bg-mainColor hover:text-white shadow-xl;
+  }
+
+  .loading-container {
+    @apply app-container flex items-center justify-center bg-white p-4 lg:px-8 shadow-lg;
+  }
+}
+
+.ProseMirror {
+  outline: none;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 1rem;
+  color: #333;
+}
