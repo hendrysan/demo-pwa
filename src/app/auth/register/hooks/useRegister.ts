@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
-import { saveToken } from "@/libs/auth";
+import { saveRefreshToken, saveToken } from "@/libs/auth";
 import { saveUser } from "@/libs/user";
 import { useRouter } from "next/navigation";
 import { RegisterFormValues, registerSchema } from "../schema/register";
@@ -30,9 +30,10 @@ export function useRegister() {
 
       if (res) {
         saveToken(res?.access_token);
+        saveRefreshToken(res?.refresh_token);
         saveUser(res?.user.name);
-        toast.success("Login successful!");
-        router.push("/dashboard");
+        toast.success("Register successful!");
+        router.push("/auth/login");
       }
     } catch (error) {
       console.error(error);

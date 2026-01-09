@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 export const loginAccount = async (payload) => {
   try {
-    const response = await axiosInstance.post("/auth/register", payload);
+    const response = await axiosInstance.post("/auth/login", payload);
 
     if (response) {
       return response?.data;

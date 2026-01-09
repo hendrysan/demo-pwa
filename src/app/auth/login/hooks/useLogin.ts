@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import toast from "react-hot-toast";
 import { LoginFormValues, loginSchema } from "../schema/login";
 import { loginAccount } from "../service/login";
-import { saveToken } from "@/libs/auth";
+import { saveRefreshToken, saveToken } from "@/libs/auth";
 import { saveUser } from "@/libs/user";
 import { useRouter } from "next/navigation";
 
@@ -15,7 +15,7 @@ export function useLogin() {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      username: "",
+      email: "",
       password: "",
     },
   });
@@ -26,10 +26,11 @@ export function useLogin() {
     const res = await loginAccount(values);
 
     if (res) {
-      saveToken(res?.token);
-      saveUser(res?.username);
+      saveToken(res?.access_token);
+      saveRefreshToken(res?.refresh_token);
+      saveUser(res?.email);
       toast.success("Login successful!");
-      router.push("/");
+      router.push("/dashboard");
     }
   };
 

@@ -25,23 +25,23 @@ export function LoginForm({
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription className="text-gray-600">
-            Enter your username below to login to your account
+            Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col gap-6">
-              {/* Username */}
+              {/* email */}
               <div>
                 <Input
-                  id="username"
+                  id="email"
                   type="text"
-                  placeholder="Username"
-                  {...register("username")}
+                  placeholder="email"
+                  {...register("email")}
                 />
-                {errors.username && (
+                {errors.email && (
                   <p className="text-red-500 text-sm mt-1">
-                    {errors.username.message}
+                    {errors.email.message}
                   </p>
                 )}
               </div>
