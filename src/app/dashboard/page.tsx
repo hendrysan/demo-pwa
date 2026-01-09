@@ -23,9 +23,9 @@ export default function DashboardWelcomePage() {
       </div>
 
       <div className="grid grid-cols-2 gap-6">
-        <AppCard link="/dashboard/book" title="Rent A Book" />
+        <AppCard link="/dashboard/book/new" title="Save A Book" />
         <AppCard
-          link="/dashboard"
+          link="/dashboard/book"
           title="Manage Your Book"
           bgColor="bg-orange-300"
         />

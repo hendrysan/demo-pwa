@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Book, BooksResponse } from "../schema/list";
 import { getBooks } from "../service/list";
@@ -40,9 +40,9 @@ export function useBooks() {
     }
   };
 
-  //   useEffect(() => {
-  //     fetchBooks();
-  //   }, [page]);
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
   return {
     books,
