@@ -32,7 +32,7 @@ export function useRegister() {
         saveToken(res?.access_token);
         saveUser(res?.user.name);
         toast.success("Login successful!");
-        router.push("/");
+        router.push("/dashboard");
       }
     } catch (error) {
       console.error(error);
