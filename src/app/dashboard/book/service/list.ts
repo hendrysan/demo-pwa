@@ -1,7 +1,7 @@
 import axiosInstance from "@/config/axiosInstance";
 import { BooksResponse } from "../schema/list";
 
-export const getBooks = async (page = 1): Promise<BooksResponse> => {
+export const getBooks = async (): Promise<BooksResponse> => {
   const res = await axiosInstance.get("/books");
 
   console.log({ res });

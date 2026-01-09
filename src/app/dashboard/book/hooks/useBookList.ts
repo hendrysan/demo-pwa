@@ -1,21 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { Book, BooksResponse } from "../schema/list";
 import { getBooks } from "../service/list";
 
 export function useBooks() {
   const [books, setBooks] = useState<Book[]>([]);
-  const [pagination, setPagination] = useState<Omit<
-    BooksResponse,
-    "data"
-  > | null>(null);
+  const [pagination] = useState<Omit<BooksResponse, "data"> | null>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 
-  const fetchBooks = async (pageNumber = 1) => {
+  const fetchBooks = async () => {
     try {
       setIsLoading(true);
       const res = await getBooks();
@@ -43,9 +40,9 @@ export function useBooks() {
     }
   };
 
-  useEffect(() => {
-    fetchBooks(page);
-  }, [page]);
+  //   useEffect(() => {
+  //     fetchBooks();
+  //   }, [page]);
 
   return {
     books,

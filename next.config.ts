@@ -1,21 +1,59 @@
-/** @type {import('next').NextConfig} */
+// import withPWAInit from "next-pwa";
 
-const isProd = process.env.NODE_ENV === "production";
-const runtimeCaching = require("next-pwa/cache");
+const isDev = process.env.NODE_ENV === "development";
+
 const withPWA = require("next-pwa")({
-  dest: "public", // Directory where the PWA files will be exported
-  disable: !isProd, // Only enable PWA in production
-  runtimeCaching, // Caching strategies
-  buildExcludes: [/dynamic-css-manifest.json$/], // Exclude dynamic CSS files from PWA
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+  sw: "sw.js",
+  scope: "/",
+  // swcMinify: !isDev,
+  buildExcludes: [/middleware-manifest\.json$/, /app-build-manifest\.json$/],
+  runtimeCaching: [
+    {
+      urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "google-fonts-cache",
+        expiration: { maxEntries: 4, maxAgeSeconds: 365 * 24 * 60 * 60 },
+      },
+    },
+    {
+      urlPattern: /\.(?:png|jpg|jpeg|svg|gif)$/,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "images-cache",
+        expiration: { maxEntries: 64, maxAgeSeconds: 24 * 60 * 60 },
+      },
+    },
+    // HTML / Pages
+    {
+      urlPattern: /^http:\/\/localhost:3000\/.*/i,
+      handler: "NetworkFirst",
+      options: {
+        cacheName: "pages-cache",
+        expiration: { maxEntries: 50, maxAgeSeconds: 24 * 60 * 60 },
+        networkTimeoutSeconds: 10,
+      },
+    },
+    // JS / CSS (opsional)
+    {
+      urlPattern: /\.(?:js|css)$/i,
+      handler: "StaleWhileRevalidate",
+      options: {
+        cacheName: "static-resources",
+        expiration: {
+          maxEntries: 50,
+          maxAgeSeconds: 24 * 60 * 60,
+        },
+      },
+    },
+  ],
 });
 
-const nextConfig = {
-  // Other Next.js configuration options
-  eslint: {
-    // Disable ESLint during production build
-    ignoreDuringBuilds: true,
-  },
-  output: "standalone", // Use standalone build output for containerization
-};
-
-module.exports = withPWA(nextConfig); // Export PWA-enabled config with Next.js config
+export default withPWA({
+  // reactStrictMode: true,
+  output: "standalone",
+});

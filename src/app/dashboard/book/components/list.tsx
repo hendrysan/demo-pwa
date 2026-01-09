@@ -1,20 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./column";
 import { useBooks } from "../hooks/useBookList";
-
-const data = [
-  {
-    id: 1,
-    title: "Clean Code",
-    author: "Robert C. Martin",
-    stock: 3,
-    created_at: "2026-01-08T05:53:48.000000Z",
-    updated_at: "2026-01-08T05:53:48.000000Z",
-  },
-];
 
 export default function ListBookTable() {
   const { isLoading, books } = useBooks();

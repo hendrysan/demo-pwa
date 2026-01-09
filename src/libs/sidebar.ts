@@ -1,4 +1,4 @@
-import { Home, Package2Icon, BarChart3, PencilIcon, List } from "lucide-react";
+import { Home, Package2Icon, List } from "lucide-react";
 
 export const sidebarMenu = [
   { title: "Dashboard", href: "/dashboard", icon: Home },
