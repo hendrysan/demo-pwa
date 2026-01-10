@@ -1,40 +1,228 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 📚 Next.js 15 + TypeScript + PWA
 
-## Getting Started
+Project ini adalah aplikasi **Next.js 15** menggunakan **TypeScript**, **Tailwind CSS**, dan sudah dikonfigurasi sebagai **Progressive Web App (PWA)**.
 
-First, run the development server:
+---
+
+## 🧰 Tech Stack
+
+- **Next.js 15 (App Router)**
+- **TypeScript**
+- **Tailwind CSS**
+- **PWA (Web App Manifest + Service Worker)**
+- **Node.js ≥ 18**
+
+---
+
+## 📦 Requirements
+
+Pastikan environment kamu sudah terpasang:
+
+- Node.js **v18 atau lebih baru**
+- npm / yarn / pnpm
+
+Cek versi:
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+## 🚀 Cara Menjalankan Project (Development)
+
+1. **Clone repository**
+
+```bash
+git clone <repository-url>
+cd <project-folder>
+```
+
+2. **Install dependencies**
+
+```bash
+npm install
+```
+
+3. **Jalankan development server**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Buka browser:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🏗️ Build & Run Production
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+Aplikasi akan berjalan dalam mode production.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+## 📱 Cara Menjalankan & Testing PWA
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> ⚠️ **PWA hanya aktif di mode production**
 
-## Deploy on Vercel
+### 1️⃣ Build Project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+### 2️⃣ Jalankan Production Server
+
+```bash
+npm run start
+```
+
+Akses:
+
+```
+http://localhost:3000
+```
+
+---
+
+### 3️⃣ Cek PWA di Browser (Chrome)
+
+1. Buka **Chrome**
+2. Klik **3 titik (⋮) → More tools → Developer Tools**
+3. Masuk ke tab **Application**
+4. Pastikan:
+   - **Manifest** terbaca
+   - **Service Worker** statusnya `activated`
+
+---
+
+### 4️⃣ Install PWA (optional)
+
+#### Desktop (Chrome / Edge)
+
+- Akan muncul icon **Install** di address bar
+- Atau:
+  - Klik **3 titik (⋮)**
+  - Pilih **Install App**
+
+## 📄 File Penting untuk PWA
+
+### `public/manifest.`json
+
+Digunakan untuk konfigurasi PWA:
+
+- name
+- short_name
+- icons
+- theme_color
+- display
+
+### Service Worker
+
+Biasanya di-generate otomatis (misalnya via `next-pwa`) di public akan regenerate sw\.js dan workbook-\*js
+
+---
+
+## ❗ Troubleshooting PWA
+
+- ❌ **PWA tidak muncul di dev mode** → ✔️ normal, PWA hanya aktif di production
+- ❌ **Install tidak muncul** → pastikan:
+  - HTTPS (atau `localhost`)
+  - Manifest valid
+  - Service worker aktif
+
+---
+
+## 🧪 Recommended Testing
+
+### 🔌 Test PWA Mode Offline
+
+Kamu bisa memastikan PWA berjalan saat **tanpa koneksi internet** dengan langkah berikut:
+
+#### Cara 1: Chrome DevTools (Recommended)
+
+1. Jalankan app di **production mode**:
+
+```bash
+npm run build
+npm run start
+```
+
+2. Buka app di Chrome:
+
+```
+http://localhost:3000
+```
+
+3. Buka **Developer Tools** (`F12` atau `Ctrl + Shift + I`)
+4. Masuk ke tab **Network**
+5. Centang opsi **Offline**
+6. Reload halaman (`Ctrl + R`)
+
+✅ Jika PWA sudah benar:
+
+- App **tetap terbuka**
+- Halaman masih bisa diakses
+- Asset (CSS, JS, icon) tetap termuat
+
+---
+
+#### Cara 2: Test Setelah Install PWA
+
+1. Install PWA ke desktop / device
+2. Matikan koneksi internet (WiFi / Data)
+3. Buka aplikasi dari icon PWA
+
+✅ App seharusnya:
+
+- Tetap bisa dibuka
+- Menampilkan UI terakhir yang tersimpan
+
+---
+
+#### Cara 3: Lighthouse Offline Check
+
+1. Buka **Chrome DevTools → Lighthouse**
+2. Pilih kategori **PWA**
+3. Klik **Analyze**
+
+Pastikan tidak ada error:
+
+- `Does not work offline`
+
+---
+
+⚠️ Catatan Penting:
+
+- Data API **tidak otomatis tersedia offline** kecuali di-cache
+- Untuk offline API:
+  - Gunakan **Cache API / IndexedDB**
+  - Atau strategi `stale-while-revalidate`
+
+---
+
+---
+
+## 📝 Notes
+
+- Jangan lupa clear cache saat update PWA
+- Untuk update PWA versi baru, **hard reload** atau reinstall app
+
+---
+
+## 👩‍💻 Author
+
+Annisa Tahira
+
+---
+
+Happy coding 🚀
