@@ -1,7 +1,5 @@
 import { formatDate } from "@/libs/utils";
-import ReturnRentalModal from "./return-modal";
 import { Button } from "@/components/ui/button-custom";
-import { ActivityIcon, CheckCheckIcon } from "lucide-react";
 
 export const columns = (onOpenDetail: (item: any) => void) => [
   {

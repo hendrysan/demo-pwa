@@ -19,7 +19,9 @@ export default function ListRentalTable() {
   if (isLoading) {
     return (
       <div className="p-4 bg-white/70 rounded-lg shadow-xl">
-        <h1 className="text-gray-500 font-semibold mb-2">List Rental's Book</h1>
+        <h1 className="text-gray-500 font-semibold mb-2">
+          List Rental&rsquo;s Book
+        </h1>
 
         <div className="space-y-3 animate-pulse">
           <div className="h-10 bg-gray-200 rounded"></div>

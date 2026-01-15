@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "postbuild": "cp service-worker/sw.js public/sw.js",
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch"
@@ -33,6 +34,7 @@
     "clsx": "^2.1.1",
     "dayjs": "^1.11.18",
     "formidable": "^3.5.4",
+    "idb": "^8.0.3",
     "lexical": "^0.23.1",
     "lodash.isequal": "^4.5.0",
     "lucide-react": "^0.473.0",

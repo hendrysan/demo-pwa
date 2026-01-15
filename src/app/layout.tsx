@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
 
-import PWAInstallPrompt from "@/components/pwa-install-prompt";
-import PWAServiceWorkerRegister from "@/components/pwa-service-worker-register";
+// import PWAInstallPrompt from "@/components/pwa-install-prompt";
+// import PWAServiceWorkerRegister from "@/components/pwa-service-worker-register";
+import useServiceWorker from "@/service-worker/useServiceWorker.js";
 
 export const metadata = {
   title: "Library App",
@@ -18,6 +19,7 @@ export const viewport = {
 };
 
 export default function RootLayout({ children }) {
+  useServiceWorker();
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -27,8 +29,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <main>{children}</main>
-        <PWAInstallPrompt />
-        <PWAServiceWorkerRegister />
+        {/* <PWAInstallPrompt />
+        <PWAServiceWorkerRegister /> */}
       </body>
     </html>
   );
